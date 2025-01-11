@@ -1,7 +1,6 @@
 package com.Hackathon.AiHealthManagement.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
-import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,11 +36,13 @@ public class Recommendation {
 	@Lob 
 	private String motivationQuote;
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	@JsonBackReference
-	private User user;
 	
+	
+	
+	@OneToOne
+	@JoinColumn(name="health_data_id",referencedColumnName = "id")
+	@JsonBackReference
+	private HealthData healthData;
 	
 
 }

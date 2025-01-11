@@ -15,7 +15,7 @@ public interface RecommendationService {
 	
 	String getMotivationalQuote(String username, HealthData data);
 
-	List<Recommendation> getRecommendation(Long userId);
+	Recommendation getRecommendation(Long userId);
 
 	
 	

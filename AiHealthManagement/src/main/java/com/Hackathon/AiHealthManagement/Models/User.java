@@ -39,9 +39,7 @@ public class User {
 	@JsonManagedReference
 	private List<HealthData> healthData;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL , orphanRemoval = true)
-	@JsonManagedReference
-	private List<Recommendation> recommendation;
+	
 	
 
 }

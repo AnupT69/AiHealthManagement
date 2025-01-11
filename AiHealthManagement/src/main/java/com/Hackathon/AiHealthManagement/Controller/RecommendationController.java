@@ -44,7 +44,7 @@ public class RecommendationController {
                 .orElseThrow(() -> new RuntimeException("Health data not found"));
 
         Recommendation recommendation = new Recommendation();
-        recommendation.setUser(user);
+        recommendation.setHealthData(healthData);
         recommendation.setDietRecommendation(recommendationService.getDietRecommendation(user.getName(), healthData));
         recommendation.setHealthRecommendation(recommendationService.getHealthRecommendation(user.getName(), healthData));
         recommendation.setExerciseRecommendation(recommendationService.getExerciseRecommendation(user.getName(), healthData));
@@ -55,27 +55,29 @@ public class RecommendationController {
         return recommendation;
     }
     
-    @Transactional
-    @GetMapping("/{user_id}")
-    public List<Recommendation> getRecommendation(@PathVariable Long user_id){
-    	
-    	User user = userRepo.findById(user_id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        List<Recommendation> recommendations = recommendationRepo.findByUser(user);
-        if (recommendations.isEmpty()) {
-            throw new RuntimeException("No recommendation for user"); 
-        }
-
-        return recommendations;
-    	
-    }
-    @GetMapping("/recommendation/{recommendationId}")
-    public Recommendation getRecommendationById(@PathVariable Long recommendationId) {
-        Recommendation recommendation = recommendationRepo.findById(recommendationId)
-                .orElseThrow(() -> new RuntimeException("Recommendation not found"));
-        return recommendation;
-    }
-    
+//    @Transactional
+//    @GetMapping("/{user_id}")
+//    public List<Recommendation> getRecommendation(@PathVariable Long user_id){
+//    	
+//    	User user = userRepo.findById(user_id)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//    	
+//        List<Recommendation> recommendations = recommendationRepo.findByUser(user);
+//        
+//        if (recommendations.isEmpty()) {
+//            throw new RuntimeException("No recommendation for user"); 
+//        }
+//
+//        return recommendations;
+//    	
+//    }
+//    @GetMapping("/recommendation/{recommendationId}")
+//    public Recommendation getRecommendationById(@PathVariable Long recommendationId) {
+//        Recommendation recommendation = recommendationRepo.findById(recommendationId)
+//                .orElseThrow(() -> new RuntimeException("Recommendation not found"));
+//        return recommendation;
+//    }
+//    
 
 }

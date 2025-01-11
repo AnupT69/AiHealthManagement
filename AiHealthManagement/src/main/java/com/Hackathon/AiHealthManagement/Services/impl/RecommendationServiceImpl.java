@@ -57,6 +57,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.Hackathon.AiHealthManagement.Models.HealthData;
 import com.Hackathon.AiHealthManagement.Models.Recommendation;
 import com.Hackathon.AiHealthManagement.Models.User;
+import com.Hackathon.AiHealthManagement.Repositories.HealthRepository;
 import com.Hackathon.AiHealthManagement.Repositories.RecommendationRepository;
 import com.Hackathon.AiHealthManagement.Repositories.UserRepository;
 import com.Hackathon.AiHealthManagement.Services.RecommendationService;
@@ -72,6 +73,9 @@ public class RecommendationServiceImpl implements RecommendationService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private HealthRepository healthRepo;
 
     @Override
     public String getDietRecommendation(String username, HealthData data) {
@@ -106,12 +110,12 @@ public class RecommendationServiceImpl implements RecommendationService {
     }
     @Transactional
     @Override
-    public List<Recommendation> getRecommendation(Long userId) {
-        User user = userRepository.findById(userId)
+    public Recommendation getRecommendation(Long healht_id) {
+        HealthData health_data = healthRepo.findById(healht_id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Fetch and return recommendations associated with the user
-        return recommendationRepository.findByUser(user);
+        return recommendationRepository.findByHealthData(health_data);
     }
     
 

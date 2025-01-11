@@ -34,7 +34,7 @@ public class MainController {
         List<HealthData> healthList = healthService.getAllHealthDataForUser(user);
         
         // Fetch recommendations for the user
-        List<Recommendation> recommendations = recommendationService.getRecommendation(userId);
+        Recommendation recommendations = recommendationService.getRecommendation(userId);
         
         model.addAttribute("healthList", healthList);
         model.addAttribute("recommendations", recommendations);
